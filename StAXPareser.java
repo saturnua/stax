@@ -39,11 +39,9 @@ public class StAXPareser {
                      StartElement startElement = event.asStartElement();
                      String qName = startElement.getName().getLocalPart();
                      if (qName.equalsIgnoreCase("computer")) {
-                        System.out.print("Start Element : computer,");
                         Iterator<Attribute> attributes = startElement.getAttributes();
                         String id = attributes.next().getValue();
                         id1 = Integer.parseInt(id);
-                        System.out.println(" id : " + id);
                      } else if (qName.equalsIgnoreCase("title")) {
                         bTitle = true;
                      } else if (qName.equalsIgnoreCase("type")) {
@@ -55,20 +53,14 @@ public class StAXPareser {
                   case XMLStreamConstants.CHARACTERS:
                      Characters characters = event.asCharacters();
                      if(bTitle){
-                        System.out.println("First Name: " 
-                        + characters.getData());
                         title1 = characters.getData();
                         bTitle = false;
                      }
                      if(bType){
-                        System.out.println("Last Name: " 
-                        + characters.getData());
                         type1 = characters.getData();
                         bType = false;
                      }
                      if(bAmount){
-                        System.out.println("Nick Name: " 
-                        + characters.getData());
                         amount1 = Integer.parseInt(characters.getData());
                         bAmount = false;
                      }
@@ -77,8 +69,6 @@ public class StAXPareser {
                      EndElement endElement = event.asEndElement();
                      if(endElement.getName().getLocalPart().equalsIgnoreCase("computer")){
                     	catalogComputers.add(new Computer(id1, title1, type1, amount1));
-                    	System.out.println("End Element : computer");
-                        System.out.println();
                      }
                      break;
                }		    
